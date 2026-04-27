@@ -1,0 +1,10 @@
+{
+  "permissions": {
+    "allow": [
+      "WebFetch(domain:bimagem.sccruzeirodosul.org)",
+      "Bash(python \"C:/Users/Pandaktwok/Desktop/build_cv.py\")",
+      "Bash(pip install *)",
+      "Bash(python -m pip install pymupdf reportlab Pillow numpy)"
+    ]
+  }
+}
