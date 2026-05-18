@@ -4,7 +4,9 @@
       "WebFetch(domain:bimagem.sccruzeirodosul.org)",
       "Bash(python \"C:/Users/Pandaktwok/Desktop/build_cv.py\")",
       "Bash(pip install *)",
-      "Bash(python -m pip install pymupdf reportlab Pillow numpy)"
+      "Bash(python -m pip install pymupdf reportlab Pillow numpy)",
+      "Bash(Select-String -Path \"c:\\\\Users\\\\renan\\\\OneDrive\\\\Área de Trabalho\\\\Projetos\\\\sccruzeirodosul.org\\\\index.html\" -Pattern \"Cada real conta\" -Context 5,5)",
+      "Bash(Out-String)"
     ]
   }
 }
