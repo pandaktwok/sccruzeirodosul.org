@@ -691,56 +691,184 @@
     }
 
     // ── Projects ────────────────────────────────────────────────────────────────
+    const SQRT_5000 = Math.sqrt(5000);
+
+    const PROJECT_DATA = [
+      { id: 0, tempId: 0, category: 'Crianças e Adolescentes', name: 'Atividades Socioculturais para Crianças e Adolescentes', description: 'Fortalecer o futuro de crianças e adolescentes em situação de vulnerabilidade em Criciúma. O projeto garante a continuidade de atividades socioculturais essenciais, profissionalizando a gestão e expandindo o alcance da instituição.' },
+      { id: 1, tempId: 1, category: 'Terceira Idade', name: 'Direito à Cultura e ao Lazer da Pessoa Idosa', description: 'Conectar a terceira idade ao mundo digital e cultural. Unimos contação de histórias à inclusão tecnológica, capacitando idosos para plataformas digitais e combatendo o isolamento social.' },
+      { id: 2, tempId: 2, category: 'Educação', name: 'CRIAR — Tema I — Cyberbullying', description: 'Combater o cyberbullying no ambiente escolar através da arte e da conscientização. O projeto distribui 3.000 livros "Lana" e realiza palestras mobilizando alunos, pais e professores em prol de um ambiente escolar seguro.' },
+      { id: 3, tempId: 3, category: 'Público 60+', name: 'Cultura e Informação para a Pessoa Idosa', description: 'Promover cidadania e inclusão digital para o público 60+. Oficinas práticas de tecnologia democratizam o acesso a ferramentas modernas, garantindo que o idoso seja protagonista na era da informação.' },
+      { id: 4, tempId: 4, category: 'Escolas Municipais', name: 'Harmonia Educacional', description: 'Transformar a educação pública através da música. Concertos didáticos em 62 escolas municipais integram alunos, professores e comunidade numa rede colaborativa de desenvolvimento artístico e cultural.' },
+      { id: 5, tempId: 5, category: 'Jovens', name: 'Músicos do Futuro', description: 'Formar novas gerações de talentos musicais no contraturno escolar. Oficinas de percussão e sopro criam bandas marciais e fanfarras na rede municipal, preparando jovens para as celebrações oficiais da cidade.' },
+    ];
+
     function Projects({ font }) {
-      const projects = [
-        { name: 'Atividades Socioculturais para Crianças e Adolescentes da Sociedade Cultural Cruzeiro do Sul', description: 'Fortalecer o futuro de crianças e adolescentes em situação de vulnerabilidade em Criciúma/SC. O projeto garante a continuidade e a expansão de atividades socioculturais essenciais através da profissionalização da gestão e contratação de assistentes de coordenação qualificados.', color: 'var(--green-pale)', accent: 'var(--green-deep)' },
-        { name: 'Garantindo o Direito à Cultura e ao Lazer da Pessoa Idosa 2', description: 'Conectar a terceira idade ao mundo digital e cultural. Unimos a tradição da contação de histórias à inclusão tecnológica, capacitando idosos para o uso de aplicativos e plataformas digitais, combatendo o isolamento e promovendo o acesso pleno à informação e ao entretenimento.', color: 'var(--bordo-pale)', accent: 'var(--bordo)' },
-        { name: 'CRIAR - Tema I - Cyberbullying', description: 'Combater o cyberbullying no ambiente escolar através da conscientização e da arte. O projeto mobiliza alunos, pais e professores com palestras e a distribuição de 3.000 livros "Lana", focando na prevenção precoce, na empatia e no cumprimento da Lei nº 13.185.', color: 'oklch(0.93 0.04 220)', accent: 'oklch(0.35 0.12 220)' },
-        { name: 'Cultura e Informação para a Pessoa Idosa', description: 'Promover a cidadania e a inclusão digital para o público 60+. Através de oficinas práticas de tecnologia e sessões de contação de histórias, o projeto democratiza o acesso a ferramentas modernas de comunicação.', color: 'oklch(0.95 0.04 60)', accent: 'oklch(0.45 0.10 60)' },
-        { name: 'HARMONIA EDUCACIONAL', description: 'Transformar a educação pública através da música. O projeto leva concertos didáticos a 62 escolas municipais, promovendo a cidadania e integrando alunos, professores e comunidade em uma rede colaborativa de desenvolvimento artístico e cultural.', color: 'oklch(0.93 0.02 180)', accent: 'oklch(0.40 0.10 180)' },
-        { name: 'MÚSICOS DO FUTURO', description: 'Formar novas gerações de talentos musicais no contraturno escolar. Com oficinas de percussão e sopro, o projeto cria bandas marciais e fanfarras na rede municipal, capacitando jovens para protagonizarem as celebrações oficiais e eventos tradicionais da cidade.', color: 'var(--cream)', accent: 'var(--bordo-light)' },
-      ];
+      const [list, setList] = useState(PROJECT_DATA);
+      const [cardSize, setCardSize] = useState(365);
+
+      useEffect(() => {
+        const update = () => setCardSize(window.matchMedia('(min-width: 640px)').matches ? 365 : 270);
+        update();
+        window.addEventListener('resize', update);
+        return () => window.removeEventListener('resize', update);
+      }, []);
+
+      function handleMove(steps) {
+        if (steps === 0) return;
+        const next = [...list];
+        if (steps > 0) {
+          for (let i = steps; i > 0; i--) {
+            const item = next.shift();
+            if (!item) return;
+            next.push({ ...item, tempId: Math.random() });
+          }
+        } else {
+          for (let i = steps; i < 0; i++) {
+            const item = next.pop();
+            if (!item) return;
+            next.unshift({ ...item, tempId: Math.random() });
+          }
+        }
+        setList(next);
+      }
 
       return (
         <section id="projetos" style={{ background: 'var(--warm-white)', padding: '100px clamp(20px,5vw,80px)' }}>
           <div style={{ maxWidth: 1200, margin: '0 auto' }}>
-            <div className="reveal" style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-end', marginBottom: 56, flexWrap: 'wrap', gap: 24 }}>
-              <div>
-                <div style={{ display: 'inline-block', background: 'var(--green-pale)', border: '1px solid var(--green-soft)', borderRadius: 100, padding: '5px 18px', marginBottom: 16 }}>
-                  <span style={{ fontSize: 12, fontWeight: 700, color: 'var(--green-deep)', letterSpacing: '0.08em', textTransform: 'uppercase' }}>Nossos projetos</span>
-                </div>
-                <h2 style={{ fontFamily: font, fontSize: 'clamp(32px,4vw,52px)', fontWeight: 700, color: 'var(--text-dark)', letterSpacing: '-0.03em', lineHeight: 1.1 }}>
-                  Onde seu apoio<br /><em style={{ color: 'var(--green-mid)', fontStyle: 'italic' }}>chega.</em>
-                </h2>
+
+            <div className="reveal" style={{ textAlign: 'center', marginBottom: 64 }}>
+              <div style={{ display: 'inline-block', background: 'var(--green-pale)', border: '1px solid var(--green-soft)', borderRadius: 100, padding: '5px 18px', marginBottom: 16 }}>
+                <span style={{ fontSize: 12, fontWeight: 700, color: 'var(--green-deep)', letterSpacing: '0.08em', textTransform: 'uppercase' }}>Nossos projetos</span>
+              </div>
+              <h2 style={{ fontFamily: font, fontSize: 'clamp(32px,4vw,52px)', fontWeight: 700, color: 'var(--text-dark)', letterSpacing: '-0.03em', lineHeight: 1.1, marginBottom: 16 }}>
+                Onde seu apoio<br /><em style={{ color: 'var(--green-mid)', fontStyle: 'italic' }}>chega.</em>
+              </h2>
+              <p style={{ fontSize: 15, color: 'var(--text-light)', letterSpacing: '0.01em' }}>
+                Clique nos cards ou use as setas para explorar
+              </p>
+            </div>
+
+            <div className="reveal" style={{ position: 'relative', width: '100%', overflow: 'hidden', height: 620 }}>
+              {list.map((project, index) => {
+                const total = list.length;
+                const position = total % 2
+                  ? index - (total + 1) / 2
+                  : index - total / 2;
+                const isCenter = position === 0;
+
+                return (
+                  <div
+                    key={project.tempId}
+                    onClick={() => handleMove(position)}
+                    style={{
+                      position: 'absolute',
+                      left: '50%',
+                      top: '50%',
+                      width: cardSize,
+                      height: cardSize,
+                      padding: 32,
+                      cursor: isCenter ? 'default' : 'pointer',
+                      border: `2px solid ${isCenter ? 'var(--green-deep)' : 'oklch(0 0 0 / 0.08)'}`,
+                      background: isCenter ? 'var(--green-deep)' : 'white',
+                      clipPath: 'polygon(48px 0%, calc(100% - 48px) 0%, 100% 48px, 100% 100%, calc(100% - 48px) 100%, 48px 100%, 0 100%, 0 0)',
+                      transform: `translate(-50%, -50%) translateX(${(cardSize / 1.5) * position}px) translateY(${isCenter ? -65 : position % 2 ? 15 : -15}px) rotate(${isCenter ? 0 : position % 2 ? 2.5 : -2.5}deg)`,
+                      transition: 'all 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94)',
+                      zIndex: isCenter ? 10 : 5 - Math.abs(position),
+                      boxShadow: isCenter ? '0px 8px 0px 4px oklch(0 0 0 / 0.10)' : 'none',
+                      display: 'flex',
+                      flexDirection: 'column',
+                      overflow: 'hidden',
+                    }}
+                  >
+                    {/* Diagonal cut line */}
+                    <span style={{
+                      position: 'absolute',
+                      display: 'block',
+                      transformOrigin: 'top right',
+                      transform: 'rotate(45deg)',
+                      background: isCenter ? 'oklch(1 0 0 / 0.18)' : 'oklch(0 0 0 / 0.08)',
+                      right: -2,
+                      top: 46,
+                      width: SQRT_5000,
+                      height: 2,
+                    }} />
+
+                    {/* Category */}
+                    <div style={{
+                      fontSize: 11,
+                      fontWeight: 700,
+                      letterSpacing: '0.1em',
+                      textTransform: 'uppercase',
+                      color: isCenter ? 'oklch(1 0 0 / 0.6)' : 'var(--text-light)',
+                      marginBottom: 14,
+                    }}>
+                      {project.category}
+                    </div>
+
+                    {/* Name */}
+                    <h3 style={{
+                      fontFamily: font,
+                      fontSize: cardSize > 300 ? 20 : 17,
+                      fontWeight: 700,
+                      color: isCenter ? 'white' : 'var(--text-dark)',
+                      lineHeight: 1.25,
+                      marginBottom: 16,
+                      letterSpacing: '-0.02em',
+                    }}>
+                      {project.name}
+                    </h3>
+
+                    {/* Description */}
+                    <p style={{
+                      fontSize: 13,
+                      color: isCenter ? 'oklch(1 0 0 / 0.75)' : 'var(--text-mid)',
+                      lineHeight: 1.65,
+                      flex: 1,
+                      overflow: 'hidden',
+                      display: '-webkit-box',
+                      WebkitLineClamp: isCenter ? 7 : 4,
+                      WebkitBoxOrient: 'vertical',
+                    }}>
+                      {project.description}
+                    </p>
+
+                    {/* CTA on center card */}
+                    {isCenter && (
+                      <a href="#contato" style={{
+                        marginTop: 20,
+                        display: 'inline-flex',
+                        alignItems: 'center',
+                        gap: 6,
+                        fontSize: 13,
+                        fontWeight: 600,
+                        color: 'var(--gold)',
+                        textDecoration: 'none',
+                        letterSpacing: '0.02em',
+                      }}>
+                        Saiba mais →
+                      </a>
+                    )}
+                  </div>
+                );
+              })}
+
+              {/* Navigation */}
+              <div style={{ position: 'absolute', bottom: 12, left: '50%', transform: 'translateX(-50%)', display: 'flex', gap: 8, zIndex: 20 }}>
+                {[{ d: -1, label: 'Projeto anterior', arrow: '‹' }, { d: 1, label: 'Próximo projeto', arrow: '›' }].map(({ d, label, arrow }) => (
+                  <button
+                    key={d}
+                    onClick={() => handleMove(d)}
+                    aria-label={label}
+                    style={{ width: 52, height: 52, display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: 22, background: 'var(--warm-white)', border: '2px solid oklch(0 0 0 / 0.10)', cursor: 'pointer', color: 'var(--text-dark)', transition: 'all 0.2s', lineHeight: 1 }}
+                    onMouseEnter={e => { e.currentTarget.style.background = 'var(--green-deep)'; e.currentTarget.style.color = 'white'; e.currentTarget.style.borderColor = 'var(--green-deep)'; }}
+                    onMouseLeave={e => { e.currentTarget.style.background = 'var(--warm-white)'; e.currentTarget.style.color = 'var(--text-dark)'; e.currentTarget.style.borderColor = 'oklch(0 0 0 / 0.10)'; }}
+                  >
+                    {arrow}
+                  </button>
+                ))}
               </div>
             </div>
-            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(260px, 1fr))', gap: 20 }}>
-              {projects.map((p, i) => (
-                <div key={i} className={`reveal reveal-delay-${i + 1}`} style={{ background: p.color, borderRadius: 24, padding: '32px 28px', border: '1px solid oklch(0 0 0 / 0.06)', transition: 'transform 0.25s, box-shadow 0.25s', cursor: 'pointer', aspectRatio: '1 / 1', overflow: 'hidden', display: 'flex', flexDirection: 'column' }}
-                  onMouseEnter={e => {
-                    e.currentTarget.style.transform = 'translateY(-4px)';
-                    e.currentTarget.style.boxShadow = '0 12px 40px oklch(0 0 0 / 0.1)';
-                    e.currentTarget.style.aspectRatio = 'auto';
-                    const desc = e.currentTarget.querySelector('.proj-desc');
-                    if (desc) { desc.style.display = 'block'; desc.style.webkitLineClamp = 'unset'; }
-                  }}
-                  onMouseLeave={e => {
-                    e.currentTarget.style.transform = '';
-                    e.currentTarget.style.boxShadow = '';
-                    e.currentTarget.style.aspectRatio = '1 / 1';
-                    const desc = e.currentTarget.querySelector('.proj-desc');
-                    if (desc) { desc.style.display = '-webkit-box'; desc.style.webkitLineClamp = '3'; }
-                  }}>
-                  <h3 style={{ fontFamily: font, fontSize: 22, fontWeight: 700, color: 'var(--text-dark)', marginBottom: 12, lineHeight: 1.2 }}>{p.name}</h3>
-                  <div style={{ flex: 1, display: 'flex', flexDirection: 'column' }}>
-                    <p className="proj-desc" style={{ fontSize: 14, color: 'var(--text-mid)', lineHeight: 1.7, marginBottom: 24, display: '-webkit-box', WebkitLineClamp: 3, WebkitBoxOrient: 'vertical', overflow: 'hidden' }}>{p.description}</p>
-                    <div style={{ marginTop: 'auto' }}>
-                      <a href="#contato" style={{ color: p.accent, fontWeight: 600, fontSize: 14, textDecoration: 'none', display: 'inline-flex', alignItems: 'center', gap: 4 }}>Saiba mais →</a>
-                    </div>
-                  </div>
-                </div>
-              ))}
-            </div>
+
           </div>
         </section>
       );
