@@ -591,7 +591,7 @@ const SQRT_5000 = Math.sqrt(5000);
 const PROJECT_DATA = [
   { id: 0, tempId: 0, category: 'Crianças e Adolescentes', name: 'Atividades Socioculturais para Crianças e Adolescentes', description: 'Fortalecer o futuro de crianças e adolescentes em situação de vulnerabilidade em Criciúma. O projeto garante a continuidade de atividades socioculturais essenciais, profissionalizando a gestão e expandindo o alcance da instituição.' },
   { id: 1, tempId: 1, category: 'Terceira Idade', name: 'Direito à Cultura e ao Lazer da Pessoa Idosa', description: 'Conectar a terceira idade ao mundo digital e cultural. Unimos contação de histórias à inclusão tecnológica, capacitando idosos para plataformas digitais e combatendo o isolamento social.' },
-  { id: 2, tempId: 2, category: 'Educação', name: 'CRIAR — Tema I — Cyberbullying', description: 'Combater o cyberbullying no ambiente escolar através da arte e da conscientização. O projeto distribui 3.000 livros "Lana" e realiza palestras mobilizando alunos, pais e professores em prol de um ambiente escolar seguro.' },
+  { id: 2, tempId: 2, category: 'Educação', name: 'CRIAR — Tema I — Cyberbullying', description: 'Combater o cyberbullying no ambiente escolar através da arte e da conscientização. O projeto distribui 3.000 livros "Lana" e realiza palestras mobilizando alunos, pais e professores em prol de um ambiente escolar seguro.', link: 'https://criar.sccruzeirodosul.org/' },
   { id: 3, tempId: 3, category: 'Público 60+', name: 'Cultura e Informação para a Pessoa Idosa', description: 'Promover cidadania e inclusão digital para o público 60+. Oficinas práticas de tecnologia democratizam o acesso a ferramentas modernas, garantindo que o idoso seja protagonista na era da informação.' },
   { id: 4, tempId: 4, category: 'Escolas Municipais', name: 'Harmonia Educacional', description: 'Transformar a educação pública através da música. Concertos didáticos em 62 escolas municipais integram alunos, professores e comunidade numa rede colaborativa de desenvolvimento artístico e cultural.' },
   { id: 5, tempId: 5, category: 'Jovens', name: 'Músicos do Futuro', description: 'Formar novas gerações de talentos musicais no contraturno escolar. Oficinas de percussão e sopro criam bandas marciais e fanfarras na rede municipal, preparando jovens para as celebrações oficiais da cidade.' },
@@ -673,7 +673,12 @@ function Projects({ font }) {
                 <h3 style={{ fontFamily: font, fontSize: cardSize > 300 ? 20 : 17, fontWeight: 700, color: isCenter ? 'white' : 'var(--text-dark)', lineHeight: 1.25, marginBottom: 16, letterSpacing: '-0.02em' }}>{project.name}</h3>
                 <p style={{ fontSize: 13, color: isCenter ? 'oklch(1 0 0 / 0.75)' : 'var(--text-mid)', lineHeight: 1.65, flex: 1, overflow: 'hidden', display: '-webkit-box', WebkitLineClamp: isCenter ? 7 : 4, WebkitBoxOrient: 'vertical' }}>{project.description}</p>
                 {isCenter && (
-                  <a href="#contato" style={{ marginTop: 20, display: 'inline-flex', alignItems: 'center', gap: 6, fontSize: 13, fontWeight: 600, color: 'var(--gold)', textDecoration: 'none', letterSpacing: '0.02em' }}>
+                  <a
+                    href={project.link || "#contato"}
+                    target={project.link ? "_blank" : undefined}
+                    rel={project.link ? "noopener noreferrer" : undefined}
+                    style={{ marginTop: 20, display: 'inline-flex', alignItems: 'center', gap: 6, fontSize: 13, fontWeight: 600, color: 'var(--gold)', textDecoration: 'none', letterSpacing: '0.02em' }}
+                  >
                     Saiba mais →
                   </a>
                 )}
