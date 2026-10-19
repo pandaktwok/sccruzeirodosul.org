@@ -109,7 +109,7 @@ function Nav({ font }) {
       <nav style={navStyle}>
         <div style={innerStyle}>
           <a href="#" style={{ textDecoration: 'none', display: 'flex', alignItems: 'center', gap: 10 }}>
-            <img src="https://bimagem.sccruzeirodosul.org/logo_sccs/favicon.png" alt="Sociedade Cultural Cruzeiro do Sul" style={{ height: 48, width: 'auto', filter: scrolled ? 'none' : 'brightness(0) invert(1)', transition: 'filter 0.4s' }} />
+            <img src={scrolled ? '/logo/SCCS_logo_completa_colorida.svg' : '/logo/SCCS_logo_completa_branco.svg'} alt="Sociedade Cultural Cruzeiro do Sul" style={{ height: 64, width: 'auto', transition: 'opacity 0.4s' }} />
           </a>
           <div style={{ display: 'flex', gap: 36, alignItems: 'center' }} className="nav-links-desktop">
             {links.map(l => (
@@ -400,14 +400,14 @@ function Donation({ font }) {
 
   const dirCards = [
     { key: 'fia', label: 'FIA', logo: 'https://bimagem.sccruzeirodosul.org/logos/FIA.png', bg: 'oklch(0.38 0.13 320)', img: 'https://bimagem.sccruzeirodosul.org/logo_uteis/livro_lana.png', title: 'Fundo da Infância e Adolescência', desc: 'Apoie projetos que promovem a qualidade de vida, o desenvolvimento e o bem-estar de crianças e adolescentes.' },
-    { key: 'direta', label: 'DIRETA', logo: 'https://bimagem.sccruzeirodosul.org/logo_sccs/favicon.png', bg: 'var(--bordo)', img: 'https://bimagem.sccruzeirodosul.org/bmcs/SCCS_06_11_2021_2.jpg', title: 'Doação Direta', desc: 'Tem um instrumento parado ou quer nos apoiar? Doe instrumentos ou contribua financeiramente para que a SCCS continue transformando vidas através da música.' },
+    { key: 'direta', label: 'DIRETA', logo: '/logo/SCCS_logo_completa_colorida.svg', bg: 'var(--bordo)', img: 'https://bimagem.sccruzeirodosul.org/bmcs/SCCS_06_11_2021_2.jpg', title: 'Doação Direta', desc: 'Tem um instrumento parado ou quer nos apoiar? Doe instrumentos ou contribua financeiramente para que a SCCS continue transformando vidas através da música.' },
     { key: 'fmi', label: 'FMI', logo: 'https://bimagem.sccruzeirodosul.org/logos/Fundo%20Municipal%20FMDPI.png', bg: 'oklch(0.34 0.10 240)', img: 'https://bimagem.sccruzeirodosul.org/chorinho_carvoeiro/Chorinho_16_12_2024_4.png', title: 'Fundo Municipal do Idoso', desc: 'Apoie projetos que promovem a qualidade de vida e o bem-estar das pessoas idosas.' },
   ];
 
   const bankCards = [
     { key: 'fia-bank', label: 'FIA', sublabel: 'Fundo da Infância e Adolescência', logo: 'https://bimagem.sccruzeirodosul.org/logos/FIA.png', bg: 'oklch(0.38 0.13 320)', accent: 'oklch(0.75 0.12 320)', bank: 'Banco do Brasil', ag: '3226-3', cc: '18.892-1', cnpj: '17.704.824/0001-45', hoverInfo: { intro: 'Deposite para a Sociedade Cultural Cruzeiro do Sul via FIA. Sua participação garante a continuidade de projetos voltados ao bem-estar e proteção de crianças e adolescentes.', council: 'Projeto aprovado pelo CMDCA:', project: 'CRIAR II: "LANA – UMA HISTÓRIA SOBRE O AUTISMO"' } },
     { key: 'fmdpi-bank', label: 'FMDPI', sublabel: 'Fundo Municipal dos Direitos da Pessoa Idosa de Criciúma', logo: 'https://bimagem.sccruzeirodosul.org/logos/Fundo%20Municipal%20FMDPI.png', bg: 'oklch(0.34 0.10 240)', accent: 'oklch(0.75 0.10 240)', bank: 'Banco do Brasil', ag: '3226-3', cc: '20.910-93', cnpj: '20.744.798/0001-45', hoverInfo: { intro: 'Deposite para a Sociedade Cultural Cruzeiro do Sul via FMI. Sua participação garante a continuidade de projetos que promovem respeito, integração e cultura para nossa comunidade.', council: 'Projeto aprovado pela CMDPI:', project: 'Cultura e Informação para a Pessoa Idosa – Tema II "Violências"' } },
-    { key: 'sccs-bank', label: 'SCCS', sublabel: 'Sociedade Cultural Cruzeiro do Sul', logo: 'https://bimagem.sccruzeirodosul.org/logo_sccs/favicon.png', bg: 'var(--bordo)', accent: 'oklch(0.75 0.10 14)', bank: 'Caixa Econômica Federal', ag: '0415', cc: '576426409-6', cnpj: '83.729.103/0001-14' },
+    { key: 'sccs-bank', label: 'SCCS', sublabel: 'Sociedade Cultural Cruzeiro do Sul', logo: '/logo/SCCS_logo_completa_colorida.svg', bg: 'var(--bordo)', accent: 'oklch(0.75 0.10 14)', bank: 'Caixa Econômica Federal', ag: '0415', cc: '576426409-6', cnpj: '83.729.103/0001-14' },
   ];
 
   return (
@@ -814,7 +814,7 @@ function Footer({ font }) {
       <div style={{ maxWidth: 1200, margin: '0 auto' }}>
         <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))', gap: 48, marginBottom: 56 }}>
           <div>
-            <img src="https://bimagem.sccruzeirodosul.org/logo_sccs/favicon.png" alt="Sociedade Cultural Cruzeiro do Sul" style={{ height: 56, width: 'auto', filter: 'brightness(0) invert(1)', marginBottom: 16, opacity: 0.9 }} />
+            <img src="/logo/SCCS_logo_completa_branco.svg" alt="Sociedade Cultural Cruzeiro do Sul" style={{ height: 96, width: 'auto', marginBottom: 16, opacity: 0.9 }} />
             <p style={{ fontSize: 14, color: 'oklch(1 0 0 / 0.5)', lineHeight: 1.7, marginBottom: 20 }}>Sociedade Cultural Cruzeiro do Sul<br />CNPJ: 83.729.103/0001-14</p>
             <div style={{ display: 'flex', gap: 12 }}>
               {['Instagram', 'Facebook', 'YouTube'].map(s => (
